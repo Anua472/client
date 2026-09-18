@@ -2,5 +2,8 @@
 
 @import 'tailwindcss';
 .container {
-  @apply mx-auto px-6
+  @apply mx-auto p-3
+}
+.text-primary{
+  @apply text-blue-700;
 }

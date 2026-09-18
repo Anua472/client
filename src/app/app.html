@@ -1,14 +1,7 @@
 <app-header></app-header>
-<div class="container mt-6 ">
+<div class="container mt-3 ">
 
-  <h1 class="text-3xl font-bold underline">Welcome to {{ title }}</h1>
-  <ul>
-    @for (product of products(); track product.id) {
-
-          <li>{{product.name}}</li>
-        }@empty {
-  <li>No hay productos disponibles.</li>
-}
-  </ul>
+  <router-outlet/>
 </div>
-<router-outlet />
+
+
