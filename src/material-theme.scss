@@ -12,6 +12,26 @@
   ));
 }
 
+
+.snack-error {
+  @include mat.snack-bar-overrides((
+    button-color: #ffffff,
+    container-color: #d32f2f, // Color rojo corregido (puedes usar un hex de tu paleta)
+    supporting-text-color: #ffffff
+  ));
+}
+
+.snack-succes {
+  @include mat.snack-bar-overrides((
+    button-color: #ffffff, // Corregido 'bbutton-color'
+    container-color: #2e7d32, // Color verde corregido
+    supporting-text-color: #ffffff
+  ));
+}
+
+
+
+
 html {
   height: 100%;
   @include mat.theme(
@@ -42,4 +62,7 @@ body {
   // Reset the user agent margin.
   margin: 0;
   height: 100%;
+
+
 }
+
