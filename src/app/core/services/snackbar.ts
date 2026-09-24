@@ -13,7 +13,7 @@ export class Snackbar {
       panelClass: ['snack-error']
     })
   }
-  succes(message: string){
+  success(message: string){
     this.snackbar.open(message, 'Close', {
       duration: 5000,
       panelClass: ['snack-succes']

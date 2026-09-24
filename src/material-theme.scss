@@ -36,8 +36,8 @@ html {
   @include mat.theme(
     (
       color: (
-        primary: mat.$blue-palette,
-        tertiary: mat.$violet-palette,
+        primary: mat.$violet-palette,
+        tertiary: mat.$magenta-palette,
       ),
       typography: Roboto,
       density: 0,

@@ -14,10 +14,10 @@ import { CartService } from '../../../core/services/cart.service';
     RouterLink,
     MatIconButton,
     MatIcon,
+    MatButton,
     MatIconButton,
     CurrencyPipe,
-
-],
+    ],
   templateUrl: './cart-item.component.html',
   styleUrl: './cart-item.component.css',
 })

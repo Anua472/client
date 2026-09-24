@@ -11,7 +11,7 @@ import { map } from 'rxjs';
 export class CartService {
   baseUrl = environment.apiUrl;
   private http = inject(HttpClient);
-  cart = signal<Cart | null>(null);
+  cart = signal<Cart | undefined>(undefined);
   itemCount = computed(() => {
     return this.cart()?.items.reduce((sum, item) => sum + item.quantity, 0);
   });
@@ -73,7 +73,7 @@ export class CartService {
     this.http.delete(this.baseUrl + 'cart?id=' + this.cart()?.id ).subscribe({
       next: () => {
         localStorage.removeItem('cart_id');
-        this.cart.set(null);
+        this.cart.set(undefined);
       }
     })
   }
