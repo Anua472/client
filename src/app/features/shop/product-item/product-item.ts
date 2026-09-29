@@ -1,6 +1,6 @@
 import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
 import { Product } from './../../../shared/models/product';
-import { Component, inject, input, Input } from '@angular/core';
+import { Component, inject, input, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { MatAnchor, MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -10,21 +10,12 @@ import { CdkAriaLive } from '../../../../../node_modules/@angular/cdk/types/_a11
 
 @Component({
   selector: 'app-product-item',
-  imports: [
-    MatCard,
-    MatCardContent,
-    CurrencyPipe,
-    MatCardActions,
-    MatButton,
-    MatIcon,
-    RouterLink,
-  
-],
+  imports: [MatCard, MatCardContent, CurrencyPipe, MatCardActions, MatButton, MatIcon, RouterLink],
   templateUrl: './product-item.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './product-item.css',
 })
 export class ProductItem {
   @Input() product?: Product;
   cartService = inject(CartService);
-
 }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ShopService } from '../../../core/services/shop.service';
 import { MatDivider } from '@angular/material/divider';
 import { MatListOption, MatSelectionList } from '@angular/material/list';
@@ -8,11 +8,10 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-filters-dialog',
-  imports: [MatDivider, MatSelectionList, MatListOption, MatButton,
-    FormsModule
-  ],
+  imports: [MatDivider, MatSelectionList, MatListOption, MatButton, FormsModule],
 
   templateUrl: './filters-dialog.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './filters-dialog.css',
 })
 export class FiltersDialog {
@@ -23,17 +22,10 @@ export class FiltersDialog {
   selectedBrands: string[] = this.data.selectedBrands;
   selectedTypes: string[] = this.data.selectedTypes;
 
-  applyFilters(){
+  applyFilters() {
     this.dialogRef.close({
       selectedBrands: this.selectedBrands,
-      selectedTypes: this.selectedTypes
-    })
+      selectedTypes: this.selectedTypes,
+    });
   }
-
-
-
-
 }
-
-
-

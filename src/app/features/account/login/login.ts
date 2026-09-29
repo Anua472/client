@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
@@ -9,15 +9,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [
-    ReactiveFormsModule,
-    MatCard,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatButton
-  ],
+  imports: [ReactiveFormsModule, MatCard, MatFormField, MatInput, MatLabel, MatButton],
   templateUrl: './login.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './login.css',
 })
 export class Login {
@@ -27,25 +21,22 @@ export class Login {
   private acivatedRoute = inject(ActivatedRoute);
   returnUrl = '/shop';
 
-  constructor(){
+  constructor() {
     const url = this.acivatedRoute.snapshot.queryParams['returnUrl'];
     if (url) this.returnUrl = url;
   }
 
   loginForm = this.fb.group({
     email: [''],
-    password: ['']
+    password: [''],
   });
 
-  onSubmit(){
+  onSubmit() {
     this.accountService.login(this.loginForm.value).subscribe({
-      next: ()=> {
+      next: () => {
         this.accountService.getUserInfo().subscribe();
         this.router.navigateByUrl(this.returnUrl);
-      }
-    })
+      },
+    });
   }
-
-
-
 }

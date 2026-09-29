@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
@@ -12,14 +12,9 @@ import { TextInput } from '../../../shared/components/text-input/text-input';
 
 @Component({
   selector: 'app-register',
-  imports: [
-    ReactiveFormsModule,
-    MatCard,
-    MatButton,
-    JsonPipe,
-    TextInput
-],
+  imports: [ReactiveFormsModule, MatCard, MatButton, JsonPipe, TextInput],
   templateUrl: './register.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './register.css',
 })
 export class Register {
@@ -30,18 +25,18 @@ export class Register {
   validationErrors?: string[];
 
   registerForm = this.fb.group({
-  firstName: ['', Validators.required],
-  lastName: ['', Validators.required],
-  email: ['',[Validators.required, Validators.email] ],
-  password: ['', Validators.required],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
   });
-  onSubmit(){
+  onSubmit() {
     this.accountService.register(this.registerForm.value).subscribe({
       next: () => {
         this.snack.success('Registration successful - you can now login');
         this.router.navigateByUrl('/account/login');
       },
-      error: errors => this.validationErrors = errors
-    })
+      error: (errors) => (this.validationErrors = errors),
+    });
   }
 }

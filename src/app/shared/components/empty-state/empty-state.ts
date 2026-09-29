@@ -1,16 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-empty-state',
-  imports: [
-    MatIcon,
-    MatButton,
-    RouterLink,
-  ],
+  imports: [MatIcon, MatButton, RouterLink],
   templateUrl: './empty-state.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './empty-state.css',
 })
 export class EmptyState {}

@@ -1,0 +1,47 @@
+import { Component, inject, OnInit, output } from '@angular/core';
+import { Checkout } from '../../../core/services/checkout';
+import {MatRadioModule} from '@angular/material/radio';
+import { CurrencyPipe } from '@angular/common';
+import { CartService } from '../../../core/services/cart.service';
+import { DeliveryMethod } from '../../../shared/models/DeliveryMethod';
+
+@Component({
+  imports: [
+    MatRadioModule,
+    CurrencyPipe,
+  ],
+  selector: 'app-checkout-delivery',
+  styleUrl: './checkout-delivery.css',
+  templateUrl: './checkout-delivery.html',
+})
+export class CheckoutDelivery implements OnInit {
+  checkoutService = inject(Checkout);
+  cartService = inject(CartService);
+  deliveryCompleted = output<boolean>();
+
+  ngOnInit(): void {
+    this.checkoutService.getDeliveryMethods().subscribe({
+      next: methods => {
+        if (this.cartService.cart()?.deliveryMethodId){
+          const method = methods.find(x => x.id ===this.cartService.cart()?.deliveryMethodId);
+          if (method){
+            this.cartService.selectedDelivery.set(method);
+            this.deliveryCompleted.emit(true);
+          }
+        }
+      }
+    });
+  }
+
+updateDeliveryMethod(method: DeliveryMethod){
+  this.cartService.selectedDelivery.set(method);
+  const cart = this.cartService.cart();
+  if (cart){
+    cart.deliveryMethodId = method.id;
+    this.cartService.setCart(cart);
+    this.deliveryCompleted.emit(true);
+  }
+
+
+}
+}

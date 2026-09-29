@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatBadge } from '@angular/material/badge';
 import { MatButton } from '@angular/material/button';
-import  {MatIcon} from '@angular/material/icon'
+import { MatIcon } from '@angular/material/icon';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Busy } from '../../core/services/busy';
 import { MatProgressBar } from '@angular/material/progress-bar';
@@ -21,9 +21,10 @@ import { MatDivider } from '@angular/material/divider';
     MatMenu,
     MatDivider,
     MatMenuItem,
-    MatMenuTrigger
-],
+    MatMenuTrigger,
+  ],
   templateUrl: './header.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './header.css',
 })
 export class Header {
@@ -32,12 +33,12 @@ export class Header {
   accountService = inject(Account);
   private router = inject(Router);
 
-  logout(){
+  logout() {
     this.accountService.logout().subscribe({
       next: () => {
         this.accountService.currentUser.set(null);
         this.router.navigateByUrl('/');
-      }
-    })
+      },
+    });
   }
 }
