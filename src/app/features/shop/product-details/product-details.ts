@@ -3,7 +3,7 @@ import { Product } from '../../../shared/models/product';
 import { ShopService } from '../../../core/services/shop.service';
 import { ActivatedRoute } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
-import { MatAnchor, MatButton } from '@angular/material/button';
+import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatLabel } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';

@@ -27,6 +27,7 @@ export class StripeService {
     return this.stripePromise;
 
   }
+  
    async initializeElements(){
     if (!this.elements){
       const stripe = await this.getStripeInstance();

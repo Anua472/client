@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Cart, CartItem } from '../../shared/models/cart';
 import { Product } from '../../shared/models/product';
 import { map } from 'rxjs';
-import { DeliveryMethod } from '../../shared/models/DeliveryMethod';
+import { DeliveryMethod } from '../../shared/models/deliveryMethod';
 
 @Service()
 export class CartService {
@@ -28,7 +28,7 @@ export class CartService {
       subtotal,
       shipping,
       discount,
-      total: subtotal + shipping - discount
+      total: subtotal + shipping - discount,
     };
   });
 
@@ -72,14 +72,14 @@ export class CartService {
     }
   }
   deleteCart() {
-    this.http.delete(this.baseUrl + 'cart?id=' + this.cart()?.id ).subscribe({
+    this.http.delete(this.baseUrl + 'cart?id=' + this.cart()?.id).subscribe({
       next: () => {
         localStorage.removeItem('cart_id');
         this.cart.set(null);
-      }
-    })
+      },
+    });
   }
-   private addOrUpdateItem(items: CartItem[], item: CartItem, quantity: number): CartItem[] {
+  private addOrUpdateItem(items: CartItem[], item: CartItem, quantity: number): CartItem[] {
     const index = items.findIndex((x) => x.productId === item.productId);
     if (index === -1) {
       item.quantity = quantity;
